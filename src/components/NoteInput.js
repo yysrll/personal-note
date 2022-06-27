@@ -7,6 +7,7 @@ class NoteInput extends React.Component{
         this.state = {
             title: "",
             body: "",
+            remainingChar: 50
         }
 
         this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
@@ -15,10 +16,14 @@ class NoteInput extends React.Component{
     }
 
     onTitleChange(event) {
+        if (event.target.value.length > 50) {
+            return false
+        }
         this.setState((prevState) => {
             return {
                 ...prevState,
                 title: event.target.value,
+                remainingChar: 50 - event.target.value.length
             }
         })
     }
@@ -38,6 +43,7 @@ class NoteInput extends React.Component{
         this.setState({
             title: "",
             body: "",
+            remainingChar: 50
         })
     }
 
@@ -47,6 +53,7 @@ class NoteInput extends React.Component{
                 <div className="mb-3">
                     <label>Title</label>
                     <input type="text" className="form-control" placeholder="Enter your note here..." value={this.state.title} onChange={this.onTitleChange} />
+                    <div className="form-text">Remaining character is {this.state.remainingChar}</div>
                 </div>
                 <div className="mb-3">
                     <label>Description</label>
