@@ -34,7 +34,7 @@ class MyApp extends React.Component {
     render() {
         return (
         <div className="container mt-5">
-            <h1>WELCOME TO MY NOTE</h1>
+            <h1 className="mb-3">WELCOME TO MY NOTE</h1>
             <div className="row">
                 <div className="col-8">
                     <NoteCardList notes={this.state.notes} />

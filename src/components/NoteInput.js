@@ -45,15 +45,16 @@ class NoteInput extends React.Component{
                     <input type="text" className="form-control" placeholder="Enter your note here..." value={this.state.title} onChange={this.onTitleChange} />
                 </div>
                 <div className="mb-3">
-                    <label>Title</label>
+                    <label>Description</label>
                     <textarea 
                         className="form-control" 
                         rows={4} 
+                        placeholder="Enter your description here..."
                         value={this.state.body}
                         onChange={this.onBodyChange}
                 />
                 </div>
-                <button className="btn btn-primary" type="submit">button</button>
+                <button className="btn btn-primary" type="submit">ADD</button>
             </form>
         )   
     }
