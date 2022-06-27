@@ -56,11 +56,18 @@ class MyApp extends React.Component {
             <h1 className="mb-3">WELCOME TO MY NOTE</h1>
             <div className="row">
                 <div className="col-8">
-                    <NoteCardList 
-                        notes={this.state.notes} 
-                        onDelete={this.onDeleteNoteHandler}
-                        onArchive={this.onArchiveNoteHandler}
-                    />
+                    {
+                        this.state.notes.length > 0 ?
+                        <NoteCardList 
+                            notes={this.state.notes} 
+                            onDelete={this.onDeleteNoteHandler}
+                            onArchive={this.onArchiveNoteHandler}
+                        /> :
+                        <div className="text-center">
+                            <h3 className="bg-danger text-white">No notes yet</h3>
+                        </div>
+                    }
+                    
                 </div>
                 <div className="col-4 p-4">
                     <NoteInput addNote={this.onAddNotehandler}/>
