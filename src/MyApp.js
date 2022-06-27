@@ -11,7 +11,8 @@ class MyApp extends React.Component {
         }
 
         this.onAddNotehandler = this.onAddNotehandler.bind(this);
-
+        this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this);
+        this.onArchiveNoteHandler = this.onArchiveNoteHandler.bind(this);
     }
 
     onAddNotehandler({ title, body }) {
@@ -19,7 +20,7 @@ class MyApp extends React.Component {
             return {
                 ...prevState,
                 notes: [{
-                    id: +new Date.now(),
+                    id: +new Date(),
                     title,
                     body,
                     createdAt: Date.now(),
@@ -31,13 +32,35 @@ class MyApp extends React.Component {
         })
     }
 
+    onDeleteNoteHandler(id) {
+        const notes = this.state.notes.filter(note => note.id !== id);
+        this.setState({ notes });
+    }
+
+    onArchiveNoteHandler(id) {
+        const notes = this.state.notes.map(note => {
+            if (note.id === id) {
+                return {
+                    ...note,
+                    archived: !note.archived
+                }
+            }
+            return note;
+        })
+        this.setState({ notes });
+    }
+
     render() {
         return (
         <div className="container mt-5">
             <h1 className="mb-3">WELCOME TO MY NOTE</h1>
             <div className="row">
                 <div className="col-8">
-                    <NoteCardList notes={this.state.notes} />
+                    <NoteCardList 
+                        notes={this.state.notes} 
+                        onDelete={this.onDeleteNoteHandler}
+                        onArchive={this.onArchiveNoteHandler}
+                    />
                 </div>
                 <div className="col-4 p-4">
                     <NoteInput addNote={this.onAddNotehandler}/>
